@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Allumeria">
+      <HintPath>..\..\..\..\SteamLibrary\steamapps\common\Allumeria Demo\Allumeria.dll</HintPath>
+    </Reference>
+    <Reference Include="Loader">
+      <HintPath>..\..\..\..\SteamLibrary\steamapps\common\Allumeria Demo\mods\Loader.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.Mathematics">
+      <HintPath>..\..\..\..\SteamLibrary\steamapps\common\Allumeria Demo\OpenTK.Mathematics.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Metadata.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
