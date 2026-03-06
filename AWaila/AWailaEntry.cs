@@ -1,4 +1,5 @@
 ﻿using Allumeria;
+using Allumeria.DataManagement.AssetLoading;
 using Allumeria.Rendering;
 using Allumeria.UI;
 using Allumeria.UI.Text;
@@ -40,8 +41,7 @@ public class WailaNode : UINode
 	private string display = string.Empty;
 	private string displayMin = string.Empty;
 
-	private int xDraw;
-	private int yDraw;
+	private AtlasTexture? toDraw;
 
 	public WailaNode(string publicName) : base(publicName)
 	{
@@ -67,8 +67,7 @@ public class WailaNode : UINode
 			if (Game.clientState.player.lookingAtBlock.isGrass) displayMin += " (grass)";
 			if (Game.clientState.player.lookingAtBlock.isFluid) displayMin += " (fluid)";
 
-			xDraw = Game.clientState.player.lookingAtBlock.item.textureX;
-			yDraw = Game.clientState.player.lookingAtBlock.item.textureY;
+			toDraw = Game.clientState.player.lookingAtBlock.item.itemSprite;
 		}
 		else
 		{
@@ -82,7 +81,7 @@ public class WailaNode : UINode
 
 	public override void Render()
 	{
-		if (!show) return;
+		if (!show || toDraw == null) return;
 
 		TextureBatcher.batcher.Start(Drawing.uiTexture);
 		TextureBatcher.batcher.AddNineSlice(new Rectangle(x, y, w, h), new Rectangle(512, 0, 16, 16), 256, 5, UIManager.scale, TextureBatcher.colorWhite);
@@ -90,8 +89,8 @@ public class WailaNode : UINode
 		TextureBatcher.batcher.Finalise();
 		TextureBatcher.batcher.DrawBatch();
 		
-		TextureBatcher.batcher.Start(Drawing.itemTexture);
-		TextureBatcher.batcher.AddQuadScaled(x + 8, y + 8, 16, 16, xDraw, yDraw, 16, 16, UIManager.scale, TextureBatcher.colorWhite);
+		TextureBatcher.batcher.Start(AssetManager.itemAtlas.generatedTexture);
+		TextureBatcher.batcher.AddQuadScaled(x + 8, y + 8, 16, 16, toDraw.x, toDraw.y, toDraw.w, toDraw.h, UIManager.scale, TextureBatcher.colorWhite);
 		TextureBatcher.batcher.Finalise();
 		TextureBatcher.batcher.DrawBatch();
 
