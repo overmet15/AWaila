@@ -6,8 +6,8 @@ namespace AWaila;
 
 public static class Config
 {
-	public static int PanelX = 50;
-	public static int PanelY = 120;
+	public static int PanelX = 380;
+	public static int PanelY = 150;
 
 	public static string? OverridePath;
 
